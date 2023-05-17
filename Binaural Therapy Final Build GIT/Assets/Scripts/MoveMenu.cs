@@ -12,6 +12,7 @@ public class MoveMenu : MonoBehaviour
     bool expanded;
     public GameObject toMove;
     public GameObject LoadingScreen;
+    public GameObject LoadingScreenOnStart;
     public AudioSource Sound;
     int SoundChoice;
     int numberOfFiles;
@@ -30,7 +31,7 @@ public class MoveMenu : MonoBehaviour
     void Start()
     {
         
-        //StartCoroutine(nextSongx3());
+        StartCoroutine(nextSongx3());
         expanded = false;
         if (int.TryParse(InfoTran.ListAccesor, out int number))//ADDED
         {
@@ -54,12 +55,10 @@ public class MoveMenu : MonoBehaviour
             StopBeats();
         }*/
 
-        PlayOnStart();
-       // LoadingScreen.SetActive(false);
 
     }
 
-    IEnumerator nextSongx3()
+    IEnumerator nextSongx3()           
     {
         NextSong();
         yield return new WaitForSecondsRealtime(0.5F); 
@@ -67,6 +66,8 @@ public class MoveMenu : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5F);
         NextSong();
         yield return new WaitForSecondsRealtime(0.5F);
+        LoadingScreenOnStart.active = false;
+        PlayOnStart();
     }
 
 
