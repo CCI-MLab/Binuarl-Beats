@@ -30,7 +30,9 @@ public class MoveMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        BBeats1.volume = 0;
+        BBeats2.volume = 0;
+        Sound.volume = 0;
         StartCoroutine(nextSongx3());
         expanded = false;
         if (int.TryParse(InfoTran.ListAccesor, out int number))//ADDED
@@ -67,6 +69,9 @@ public class MoveMenu : MonoBehaviour
         NextSong();
         yield return new WaitForSecondsRealtime(0.5F);
         LoadingScreenOnStart.active = false;
+        Sound.volume = 1;
+        BBeats1.volume = 1;
+        BBeats2.volume = 0;
         PlayOnStart();
     }
 
@@ -174,8 +179,8 @@ public class MoveMenu : MonoBehaviour
 
     public void MoveMenuView(GameObject x)
     {
-        Vector3 expand = new Vector3(410, 0, 0);
-        Vector3 contract = new Vector3(-410, 0, 0);//346
+        Vector3 expand = new Vector3(710, 0, 0);
+        Vector3 contract = new Vector3(-710, 0, 0);//346
         toMove = x;
 
         if (expanded == false)

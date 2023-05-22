@@ -948,7 +948,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 453.88504, y: 14.58698}
+  m_AnchoredPosition: {x: 599, y: 9.8763}
   m_SizeDelta: {x: 741.83, y: 714.421}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &288234884
@@ -1612,7 +1612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -191, y: -21}
+  m_AnchoredPosition: {x: -186.7, y: -17.3}
   m_SizeDelta: {x: 357.1521, y: 89.9802}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &404065242
@@ -3593,7 +3593,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150282877}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1150282879
 Camera:
   m_ObjectHideFlags: 0

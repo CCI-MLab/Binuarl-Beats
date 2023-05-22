@@ -22,7 +22,8 @@ public class LoadingScene : MonoBehaviour
     /*public void LoadSceneAsync() 
     {
         StartCoroutine(TextLoading());
-    } */
+    } 
+    */
 
     public void LoadTextLoadingScreen()
     {
