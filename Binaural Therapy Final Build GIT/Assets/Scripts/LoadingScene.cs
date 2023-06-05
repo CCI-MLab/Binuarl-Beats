@@ -9,15 +9,56 @@ using static InfoTran;
 
 public class LoadingScene : MonoBehaviour
 {
+    public float LoadingMinTime = .05f;
     public GameObject LoadingScreen;
+    private float StartLoadingTime;
+    private AsyncOperation LoadingOperation;
     public AudioSource ButtonSounds;
     public TextMeshProUGUI text;
+    private bool loading = false;
     
-    public void LoadScene(int sceneId){
-        StartCoroutine(LoadSceneAsync(sceneId));
+    void update()
+    {
+        if (loading)
+        {
+            float loadingTime = Time.time - StartLoadingTime;
 
-        StartCoroutine(TextLoading());
+            // Checks if the min loading time has passed
+            if (loadingTime >= LoadingMinTime)
+            {
+                // At this point if the loading is really over, the scene will load
+                // If the load it's not over, it will continue to load and switch to the scene at the end
+                LoadingOperation.allowSceneActivation = true;
+                loading = false;
+            }
+        }
     }
+
+
+
+     public void LoadScene(int sceneId)
+     {
+         StartCoroutine(LoadSceneAsync(sceneId));
+
+         StartCoroutine(TextLoading());
+     }
+    
+    public void StartLoading(int sceneId)
+    {
+        LoadingScreen.SetActive(true);
+        LoadTextLoadingScreen();
+        // Start loading the Scene asynchronously
+        LoadingOperation = SceneManager.LoadSceneAsync(sceneId);
+
+        // Set allowSceneActivation to false inmediately so it wold finish loading
+        LoadingOperation.allowSceneActivation = false;
+
+        // Store the starting time of the loading process
+        StartLoadingTime = Time.time;
+
+        loading = true;
+    }
+
 
     /*public void LoadSceneAsync() 
     {
@@ -33,7 +74,7 @@ public class LoadingScene : MonoBehaviour
     IEnumerator LoadSceneAsync(int sceneId){
 
         LoadingScreen.SetActive(true);
-
+        yield return new WaitForSecondsRealtime(0.2F);
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
 
         yield return null;

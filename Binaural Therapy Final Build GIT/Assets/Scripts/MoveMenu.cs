@@ -30,11 +30,14 @@ public class MoveMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadingScreenOnStart.active = true;
-        BBeats1.volume = 0;
-        BBeats2.volume = 0;
-        Sound.volume = 0;
-        StartCoroutine(nextSongx3());
+        //Debug.Log("THE START");
+        //LoadingScreenOnStart.active = true;
+        //BBeats1.volume = 0;
+        //BBeats2.volume = 0;
+       // Sound.volume = 0;
+       // Debug.Log("HI1");
+       // StartCoroutine(nextSongx3());
+       // Debug.Log("HI2");
         expanded = false;
         if (int.TryParse(InfoTran.ListAccesor, out int number))//ADDED
         {
@@ -43,7 +46,9 @@ public class MoveMenu : MonoBehaviour
         }
         else//ADDED
             SoundChoice = 1;
+        Debug.Log("HI3");
         GetNumberOfFiles(); //populates numberOfFiles.
+        Debug.Log("HI4");
         if (ComputerControl == true)
         {                      
             GetNamesOfFiles();
@@ -57,28 +62,37 @@ public class MoveMenu : MonoBehaviour
       //      Sound.Stop();
             StopBeats();
         }*/
-
-
+        Sound.volume = 1;
+        NextSong();
     }
 
     IEnumerator nextSongx3()           
     {
+        Debug.Log("HI5");
+        Sound.volume = 0;
+        Debug.Log("Co-routine Started");
         NextSong();
+        Debug.Log("HI6");
         yield return new WaitForSecondsRealtime(0.5F); 
         NextSong();
+        Debug.Log("HI7");
         yield return new WaitForSecondsRealtime(0.5F);
+        Debug.Log("HI8");
         NextSong();
         yield return new WaitForSecondsRealtime(0.5F);
         LoadingScreenOnStart.active = false;
-        Sound.volume = 1;
-        BBeats1.volume = 1;
-        BBeats2.volume = 0;
+        Debug.Log("HI9");
         PlayOnStart();
+        Debug.Log("THE END");
+        BBeats1.volume = VolumeSlider.value;
+        BBeats2.volume = VolumeSlider.value;
+        Sound.volume = 1;
     }
 
 
     IEnumerator Wait(float waitFor)  //M
     {
+        Debug.Log("HI11");
         //Print the time of when the function is first called.
         //Debug.Log("Started Coroutine at timestamp : " + Time.time);
         //yield on a new YieldInstruction that waits for 5 seconds.
@@ -91,16 +105,26 @@ public class MoveMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("HI12");
         timeNow = Time.realtimeSinceStartup;
-        BBeats1.volume = VolumeSlider.value;
-        BBeats2.volume = VolumeSlider.value;
-
+        if (LoadingScreenOnStart.active == true)
+        {
+            BBeats1.volume = 0;
+            BBeats2.volume = 0;
+            Sound.volume = 0;
+        }
+        else
+        {
+            BBeats1.volume = VolumeSlider.value;
+            BBeats2.volume = VolumeSlider.value;
+        }
+        Debug.Log("vol same as slider");
 
     }
 
     void GetNumberOfFiles()
     {
- 
+        Debug.Log("HI13");
         string LinkToFolder = "Sound/" + InfoTran.ListAccesor;
         Resources.LoadAll(LinkToFolder);
         numberOfFiles = Resources.LoadAll(LinkToFolder).Length;
@@ -109,6 +133,7 @@ public class MoveMenu : MonoBehaviour
 
     void GetNamesOfFiles()
     {
+        Debug.Log("HI14");
         string FolderPath = ("Assets/Resources/Sound/" + InfoTran.ListAccesor);
         var info = new DirectoryInfo(FolderPath);
         var fileInfo = info.GetFiles();
@@ -180,8 +205,9 @@ public class MoveMenu : MonoBehaviour
 
     public void MoveMenuView(GameObject x)
     {
-        Vector3 expand = new Vector3(710, 0, 0);
-        Vector3 contract = new Vector3(-710, 0, 0);//346
+        Debug.Log("HI15");
+        Vector3 expand = new Vector3(410, -4, 0);
+        Vector3 contract = new Vector3(-410, 4, 0);//346, 710
         toMove = x;
 
         if (expanded == false)
@@ -204,19 +230,22 @@ public class MoveMenu : MonoBehaviour
 
     void PlayOnStart()           //Added
     {
+        Debug.Log("HI16");
         SoundChoice = Random.Range(1, numberOfFiles);         //Added to fix the repeating #2
         Sound.clip = Resources.Load<AudioClip>($"Sound/{InfoTran.ListAccesor}/{SoundChoice}");//CHANGED(Random.Range) 
        // Sound.clip = Resources.Load<AudioClip>($"Sound/{InfoTran.ListAccesor}/2");
         Sound.Play();
-
+        Debug.Log("HI10");
     }
 
 
     public void NextSong()
     {
+        Debug.Log("HI17");
         float startTime = Time.realtimeSinceStartup;
         Sound.Stop();
         StopBeats();
+        Debug.Log("HI18");
         if (SoundChoice < numberOfFiles)   //Changed to make the iterator work for many different kinds of files    
             SoundChoice++;
         else
@@ -225,6 +254,7 @@ public class MoveMenu : MonoBehaviour
         Sound.clip = Resources.Load<AudioClip>($"Sound/{InfoTran.ListAccesor}/{soundChoice()}");
         Sound.PlayOneShot(Sound.clip);
         StartBeats();
+        Debug.Log("HI19");
         Debug.Log($"Time taken is {startTime - timeNow}");
     }
     // Currently, (Loopthrough (line 45) = true && DSP Buffer = best latency
@@ -236,7 +266,9 @@ public class MoveMenu : MonoBehaviour
 
         public void PreviousSong()
     {
+        Debug.Log("HI20");
         StopBeats();
+        Debug.Log("HI21");
         Sound.Stop();
         if (SoundChoice > 1)
             SoundChoice--;
@@ -244,7 +276,8 @@ public class MoveMenu : MonoBehaviour
             SoundChoice = numberOfFiles;
         Sound.clip = Resources.Load<AudioClip>($"Sound/{InfoTran.ListAccesor}/{soundChoice()}");
         Sound.Play();
-        StartBeats(); 
+        StartBeats();
+        Debug.Log("HI22");
     }
        
 
@@ -252,12 +285,21 @@ public class MoveMenu : MonoBehaviour
 
      void StopBeats()
     {
+        Debug.Log("HI23");
         BBeats1.Pause();
         BBeats2.Pause();
     }
 
     void StartBeats()
     {
+        //if(LoadingScreenOnStart.active == true)
+        {
+      //      BBeats1.volume = 0;
+      //      BBeats2.volume = 0;
+      //      Sound.volume = 0;
+        }
+        
+        Debug.Log("HI24");
         BBeats1.Play();
         BBeats2.Play();
     }

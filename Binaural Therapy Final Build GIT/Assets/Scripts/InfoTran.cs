@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public static class InfoTran
 {
-    public static int picture = -2;
+    public static int picture = 9;
 
     public static int music;
 
