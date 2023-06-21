@@ -9,6 +9,8 @@ public static class InfoTran
 
     public static int music;
 
+    public static string binuralBeats;
+
     public static float pSliderVal = 1;
 
     public static string ListAccesor = "River";         //Allows program to access a different folder for music depending on this variable

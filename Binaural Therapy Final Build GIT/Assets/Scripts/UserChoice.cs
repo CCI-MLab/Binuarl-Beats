@@ -94,7 +94,10 @@ public class UserChoice : MonoBehaviour
     }
 
 
-
+  //  public void SpeedChoice(string Speed)
+  // {
+  //      InfoTran.binuralBeats = $"Bsounds/{speed}"; 
+  // }
 
 
 

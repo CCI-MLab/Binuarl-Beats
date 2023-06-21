@@ -12,7 +12,7 @@ using static InfoTran;
 
 public class DisplayBuild : MonoBehaviour
 {
-    public Button Display; 
+    public Button Display;
     public AudioSource soundPlayer;
     public AudioSource Bsource1;
     public AudioSource Bsource2;
@@ -20,16 +20,17 @@ public class DisplayBuild : MonoBehaviour
     public VideoPlayer videoPlayer;
 
     // Start is called before the first frame update
-    void Start()   
+    void Start()
     {
         ReadFile();
-        Bsource1.pitch = InfoTran.pSliderVal;
-    }              
+        // Bsource1.pitch = InfoTran.pSliderVal;
+        MakeBeatsSecondOption();
+    }
 
     // Update is called once per frame
     void Update()
     {
-    
+
     }
 
     public void ReadFile()
@@ -54,6 +55,14 @@ public class DisplayBuild : MonoBehaviour
         */
 
     }
+
+     void MakeBeatsSecondOption()            //In case the pitch is off  
+    {                       //# Resources.Load<AudioClip>($"Infotran.binuralBeats");
+        Bsource2.clip = Resources.Load<AudioClip>($"{InfoTran.binuralBeats}"); ;
+    }
+
+
+
 
     public void MoveToScene(int sceneID)
     {

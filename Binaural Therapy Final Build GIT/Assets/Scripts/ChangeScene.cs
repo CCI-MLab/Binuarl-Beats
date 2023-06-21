@@ -14,6 +14,6 @@ public class ChangeScene : MonoBehaviour
 
     public void ChooseFrequency(float F)
     {
-        InfoTran.pSliderVal = F;
+        InfoTran.binuralBeats = $"Bsounds/{F}";
     }
 }
